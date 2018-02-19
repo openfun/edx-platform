@@ -67,9 +67,11 @@
                   </li>
 
                   ### FUN: Add a button to our video upoader
+                  % if getattr(settings, 'FUN_DEFAULT_VIDEO_PLAYER', None) is not None:
                   <li class="nav-item nav-course-courseware-videos">
                     <a href="${reverse('videoupload:home', kwargs={'course_key_string': unicode(course_key)})}">${_("Video Uploads")}</a>
                   </li>
+                  % endif
 
                 </ul>
               </div>
