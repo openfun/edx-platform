@@ -67,7 +67,9 @@ git+https://github.com/edx/rfc6266.git@v0.0.5-edx#egg=rfc6266==0.0.5-edx
 
 # Used for testing
 git+https://github.com/edx/lettuce.git@0.2.20.002#egg=lettuce==0.2.20.002
-git+https://github.com/edx/pa11ycrawler.git@0.0.4#egg=pa11ycrawler==0.0.4
+# Remove this test related dependancy because its make the build fails
+# Chain of badly bounded dependencies leads to download an incompatible one (cryptograph 2.1.14, I guess)
+# git+https://github.com/edx/pa11ycrawler.git@0.0.4#egg=pa11ycrawler==0.0.4
 
 # Our libraries:
 git+https://github.com/edx/XBlock.git@xblock-0.4.10#egg=XBlock==0.4.10
