@@ -4,91 +4,136 @@
       <h2 class="title center-col">
         <%= _.sprintf(
             gettext( "You are enrolling in: %(courseName)s"),
-            { courseName: '<span class="course-title">' + courseName + '</span>' }
-          ) %>
-      </h2>
-    <% } else { %>
-      <h2 class="title">
-        <%= _.sprintf(
-            gettext( "You are upgrading your enrollment for: %(courseName)s"),
-            { courseName: '<span class="course-title">' + courseName + '</span>' }
-          ) %>
-      </h2>
-      <div class="instruction">
-        <%- gettext( "You can now enter your payment information and complete your enrollment." ) %>
-      </div>
-    <% } %>
+                    {courseName: '<span class="course-title">' + courseName + '</span>' }
+    ) %>
+            </h2>
+      <% } else { %>
+        <h2 class="title">
+          <%= _.sprintf(
+                        "<span class='color-black'>Vous allez passer un examen pour obtenir un certificat:</span> <strong>%(courseName)s</strong>",
+            {courseName: '<span class="course-title">' + courseName + '</span>' }
+              ) %>
+            </h2>
+        <div class="instruction">
 
-    <div class="instruction <% if ( !upgrade ) { %>center-col<% } %>">
-      <% if ( _.some( requirements, function( isVisible ) { return isVisible; } ) ) { %>
+        </div>
+        <% } %>
+
+        </div>
+</div>
+</div >
+
+  <div class="fun-wrapper-make-payment-step">
+
+    <strong>Il existe 3 types d’examen :</strong>
+    <ul>
+      <li>A - Examen en présentiel</li>
+      <li>B - Soumission des travaux et corrections en différé</li>
+      <li>C - Examen surveillé à distance par ProctorU</li>
+    </ul>
+
+    <h3>ATTENTION DE CHOISIR LA BONNE PROCÉDURE :</h3>
+    <strong class="color-fun-red">
+      Dans les cas A et B
+    </strong>
+
+    <p>
+      <strong>Si l’examen qu’on vous propose est :</strong>
+      <ul>
+        <li>A - Examen en présentiel</li>
+        <li>B - Soumission des travaux et corrections en différé</li>
+      </ul>
+      <strong>vous n’êtes pas concerné par le test web cam et la demande de photo d’identité officielle ci-dessous.
+Dans ce cas, vous devez seulement :</strong>
+      <ul>
+        <li>1 - Lire et accepter les conditions générales d’utlisation ci-dessous en cliquant sur le bouton “J’accepte”</li>
+        <li>2 - Effectuer le paiement en cliquant sur le bouton “payer” et suivre la procédure indiquée</li>
+      </ul>
+      <strong class="color-fun-red">Dans le cas C</strong>
+      <br>
+        <strong>Si l’examen qu’on vous propose est :</strong>
+        <ul>
+          <li>C - Examen surveillé à distance par ProctorU</li>
+        </ul>
+        <strong>vous êtes concerné par  la procédure ci-dessous (photo d’identité officielle, test webcam...)</strong>
+    </p>
+      <p>
+        Avant de vous inscrire, prenez le temps de lire <a href="https://www.fun-mooc.fr/help/article/360000322409/">le réglement d'examen</a>
+      </p>
+      <p>
+        Une fois le paiement effectué vous vous engagez à passer un examen surveillé à distance selon les protocoles définis pour ce cours. Veuillez vérifier que votre équipement est compatible avec le système de surveillance de notre fournisseur ProctorU en cliquant ici.
+    </p>
       <p>
         <% if ( verificationDeadline ) { %>
-          <%- _.sprintf(
-            gettext( "You can pay now even if you don't have the following items available, but you will need to have these by %(date)s to qualify to earn a Verified Certificate." ),
-            { date: verificationDeadline }
-          ) %>
-        <% } else if ( !isActive ) { %>
-          <%- gettext( "You need to activate your account before you can enroll in courses. Check your inbox for an activation email. After you complete activation you can return and refresh this page." ) %>
-        <% } else { %>
-            <%- gettext( "You can pay now even if you don't have the following items available, but you will need to have these to qualify to earn a Verified Certificate." ) %>
+          Vous pouvez payer maintenant même si vous n'avez pas les élements suivants, mais vous en aurez besoin avant le
+            <%- _.sprintf(" %(date)s ", {date: verificationDeadline } ) %>
+        pour un certificat vérifié.
         <% } %>
-      </p>
-      <% } %>
-    </div>
+    </p>
+</div>
 
-    <% if ( requirements['account-activation-required'] || requirements['photo-id-required'] || requirements['webcam-required']) { %>
-    <div class="requirements-container">
-      <ul class="list-reqs <% if ( requirements['account-activation-required'] ) { %>account-not-activated<% } %>">
-        <% if ( requirements['account-activation-required'] ) { %>
-          <li class="req req-0 req-activate">
-            <h3 class="title"><%- gettext( "Activate Your Account" ) %></h3>
-            <div class="placeholder-art">
-              <i class="icon fa fa-envelope-o" aria-hidden="true"></i>
-            </div>
 
-            <div class="copy">
-              <p>
-                <span class="copy-super"><%- gettext( "Check Your Email" ) %></span>
-              </p>
-            </div>
-          </li>
-        <% } else {%>
+    <div id="wrapper-review" tab-index="0" class="wrapper-view make-payment-step">
+
+
+      <% if ( requirements['account-activation-required'] || requirements['photo-id-required'] || requirements['webcam-required']) { %>
+        <div class="requirements-container">
+          <ul class="list-reqs <% if ( requirements['account-activation-required'] ) { %>account-not-activated<% } %>">
+            <% if ( requirements['account-activation-required'] ) { %>
+              <li class="req req-0 req-activate">
+                <h3 class="title"><%- gettext( "Activate Your Account" ) %></h3>
+                <div class="placeholder-art">
+                  <i class="icon fa fa-envelope-o" aria-hidden="true"></i>
+                </div>
+
+                <div class="copy">
+                  <p>
+                    <span class="copy-super"><%- gettext( "Check Your Email" ) %></span>
+                  </p>
+                </div>
+              </li>
+              <% } else {%>
           <% if ( requirements['photo-id-required'] ) { %>
-          <li class="req req-1 req-id">
-            <h3 class="title"><%- gettext( "Government-Issued Photo ID" ) %></h3>
-            <div class="placeholder-art fa-lg">
-              <i class="icon fa fa-list-alt fa-stack-2x" aria-hidden="true"></i>
-              <i class="icon fa fa-user id-photo fa-stack-1x" aria-hidden="true"></i>
-            </div>
+              <li class="req req-1 req-id">
+                <h3 class="title"><%- gettext( "Government-Issued Photo ID" ) %></h3>
+                <div class="placeholder-art fa-lg">
+                  <i class="icon fa fa-list-alt fa-stack-2x" aria-hidden="true"></i>
+                  <i class="icon fa fa-user id-photo fa-stack-1x" aria-hidden="true"></i>
+                </div>
 
-            <div class="copy"></div>
-          </li>
-          <% } %>
+                <div class="copy"></div>
+              </li>
+              <% } %>
 
           <% if ( requirements['webcam-required'] ) { %>
-          <li class="req req-2 req-webcam">
-            <h3 class="title"><%- gettext( "Webcam" ) %></h3>
-            <div class="placeholder-art">
-              <i class="icon fa fa-video-camera" aria-hidden="true"></i>
-            </div>
+              <li class="req req-2 req-webcam">
+                <h3 class="title"><%- gettext( "Webcam" ) %></h3>
+                <div class="placeholder-art">
+                  <i class="icon fa fa-video-camera" aria-hidden="true"></i>
+                </div>
 
-            <div class="copy"></div>
-          </li>
-          <% } %>
+                <div class="copy"></div>
+              </li>
+              <% } %>
         <% } %>
       </ul>
 
+        </div>
+        <% } %>
+
+    <div class="fun-wrapper-make-payment-step">
+        <p>
+          <strong>
+            DANS TOUS LES CAS, conformément à l'article L 121 21 du code de la consommation, vous pouvez vous désinscrire et obtenir un remboursement dans un délai de 14 jours calendaires. À l’issue de ce délai, toute désinscription ne donnera plus lieu à remboursement.
+          </strong>
+        </p>
+      </div>
     </div>
-    <% } %>
-
-
-    <p><%= gettext("Once payment has been processed, you commit to taking a remotely proctored exam following the protocol defined for this course. Please check that your equipment is compatible with the proctoring system of our ProctorU provider by clicking <a href='http://www.proctoru.com/testitout/' target='_blank'>this link</a>.") %></p>
-    <p><%= gettext("According to Article L 121 21 of the Consumer Code, you may unenroll and obtain a refund within 14 calendar days. After this period, unenrollment will not trigger any reimbursement.") %></p>
 
     <div class="display-fun-payment-terms">
       <div class="display-fun-payment-terms-header">
         Veuillez lire et accepter les conditions d'utilisation
-      </div>
+            </div>
 
       <div class="display-fun-payment-terms-text">
       </div>
@@ -96,38 +141,38 @@
       <div class="display-fun-payment-terms-footer">
         <span id="validate-terms" class="btn-terms">
           J'accepte
-        </span>
+                </span>
       </div>
 
     </div>
 
 
     <% if ( courseModeSlug === 'no-id-professional') { %>
-    <div class="container register is-verified">
-      <h3 class="title"><%- gettext( "ID-Verification is not required for this Professional Education course." ) %></h3>
-      <p><%- gettext( "All professional education courses are fee-based, and require payment to complete the enrollment process." ) %></p>
-    </div>
-    <% } else if ( alreadyVerified && verificationGoodUntil ) { %>
-    <div class="container register is-verified">
-    </div>
-    <% } %>
+      <div class="container register is-verified">
+        <h3 class="title"><%- gettext( "ID-Verification is not required for this Professional Education course." ) %></h3>
+        <p><%- gettext( "All professional education courses are fee-based, and require payment to complete the enrollment process." ) %></p>
+      </div>
+      <% } else if ( alreadyVerified && verificationGoodUntil ) { %>
+        <div class="container register is-verified">
+        </div>
+        <% } %>
 
   <% if ( isActive ) { %>
-  <div class="payment-buttons nav-wizard is-ready center">
-    <input type="hidden" name="contribution" value="<%- minPrice %>" />
-    <input type="hidden" name="sku" value="<%- sku %>" />
-    <div class="purchase">
+      <div class="payment-buttons nav-wizard is-ready center">
+        <input type="hidden" name="contribution" value="<%- minPrice %>" />
+        <input type="hidden" name="sku" value="<%- sku %>" />
+        <div class="purchase">
 
-      <p class="product-info"><span class="product-name"></span> <%- gettext( "price" ) %>: <span class="price">€<%- minPrice %></span></p>
+          <p class="product-info"><span class="product-name"></span> <%- gettext( "price" ) %>: <span class="price">€<%- minPrice %></span></p>
 
+        </div>
+        <div class="pay-options">
+          <%
+          // payment buttons will go here
+          %>
     </div>
-    <div class="pay-options">
-      <%
-      // payment buttons will go here
-      %>
-    </div>
-  </div>
-  <% } %>
+      </div>
+      <% } %>
 
   <form id="payment-processor-form"></form>
-</div>
+  </div>
