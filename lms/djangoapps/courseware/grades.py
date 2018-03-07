@@ -33,6 +33,20 @@ from openedx.core.djangoapps.signals.signals import GRADES_UPDATED
 log = logging.getLogger("edx.courseware")
 
 
+def _get_score(*args):
+    """ Wrapper to support new score data structure returned by last revision of edx-ora2 (2.1.11)
+    See: https://fun.plan.io/issues/4052
+    """
+    score = get_score(*args)
+    if isinstance(score, dict):
+        # Excercice was a peer assessment, it returned a dict
+        correct, total = score['points_earned'], score['points_possible']
+    else:
+        # All other excercice types
+        (correct, total) = score
+    return (correct, total)
+
+
 class MaxScoresCache(object):
     """
     A cache for unweighted max scores for problems.
@@ -421,8 +435,7 @@ def _grade(student, request, course, keep_raw_scores, field_data_cache, scores_c
                         )
                         if not user_access:
                             continue
-
-                        (correct, total) = get_score(
+                        (correct, total) = _get_score(
                             student,
                             module_descriptor,
                             create_module,
@@ -614,7 +627,7 @@ def _progress_summary(student, request, course, field_data_cache=None, scores_cl
                         section_module, student.id, module_creator
                 ):
                     locations_to_children[module_descriptor.parent].append(module_descriptor.location)
-                    (correct, total) = get_score(
+                    (correct, total) = _get_score(
                         student,
                         module_descriptor,
                         module_creator,
