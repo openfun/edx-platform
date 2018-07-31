@@ -1212,24 +1212,29 @@ class CourseDescriptor(CourseFields, SequenceDescriptor, LicenseMixin):
         Get a list of dicts with start and end fields with datetime values from
         the discussion_blackouts setting
         """
+        blackout_dates = self.discussion_blackouts
         date_proxy = Date()
+        if blackout_dates and type(blackout_dates[0]) not in (list, tuple):
+            blackout_dates = [blackout_dates]
+
         try:
             ret = [
                 {"start": date_proxy.from_json(start), "end": date_proxy.from_json(end)}
                 for start, end
-                in filter(None, self.discussion_blackouts)
+                in [blackout_date for blackout_date in blackout_dates if blackout_date]
             ]
             for blackout in ret:
                 if not blackout["start"] or not blackout["end"]:
                     raise ValueError
             return ret
         except (TypeError, ValueError):
-            log.exception(
+            log.info(
                 "Error parsing discussion_blackouts %s for course %s",
-                self.discussion_blackouts,
+                blackout_dates,
                 self.id
             )
             return []
+
 
     @property
     def forum_posts_allowed(self):
