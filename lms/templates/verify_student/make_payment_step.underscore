@@ -32,7 +32,7 @@
       <li>C - Examen surveillé à distance par ProctorU</li>
     </ul>
 
-    <h3>ATTENTION DE CHOISIR LA BONNE PROCÉDURE :</h3>
+    <h3>ATTENTION DE CHOISIR LA BONNE PROCÉDURE SÉLECTIONNÉE PAR L'EQUIPE PÉDAGOGIQUE DU MOOC :</h3>
     <strong class="color-fun-red">
       Dans les cas A et B
     </strong>
@@ -55,19 +55,18 @@ Dans ce cas, vous devez seulement :</strong>
         <ul>
           <li>C - Examen surveillé à distance par ProctorU</li>
         </ul>
-        <strong>vous êtes concerné par  la procédure ci-dessous (photo d’identité officielle, test webcam...)</strong>
+        <strong>vous êtes concerné par la procédure ci-dessous (photo d’identité officielle, test webcam...)</strong>
     </p>
       <p>
-        Avant de vous inscrire, prenez le temps de lire <a href="https://www.fun-mooc.fr/help/article/360000322409/">le réglement d'examen</a>
+      Avant de vous inscrire, prenez le temps de lire <a href="https://www.fun-mooc.help/hc/fr/articles/360001306209" target="_blank">le règlement d'examen (version française)</a> / <a href="https://www.fun-mooc.help/hc/fr/articles/360001310345" target="_blank">examination rules (english version)</a>
       </p>
       <p>
-        Une fois le paiement effectué vous vous engagez à passer un examen surveillé à distance selon les protocoles définis pour ce cours. Veuillez vérifier que votre équipement est compatible avec le système de surveillance de notre fournisseur ProctorU en cliquant ici.
+      Une fois le paiement effectué vous vous engagez à passer un examen surveillé à distance selon les protocoles définis pour ce cours. Veuillez vérifier que votre équipement est compatible avec le système de surveillance de notre fournisseur ProctorU en <a href="https://www.fun-mooc.fr/proctoru/" target="_blank">cliquant ici</a>.
     </p>
       <p>
         <% if ( verificationDeadline ) { %>
-          Vous pouvez payer maintenant même si vous n'avez pas les élements suivants, mais vous en aurez besoin avant le
-            <%- _.sprintf(" %(date)s ", {date: verificationDeadline } ) %>
-        pour un certificat vérifié.
+        Vous avez jusqu'au <%- _.sprintf(" %(date)s ", {date: verificationDeadline } ) %> pour vous inscrire à cet examen.
+        Notez que le jour de l'examen vous aurez impérativement besoin d'une pièce d'identité à montrer au surveillant et que votre ordinateur devra être muni d'une webcam.
         <% } %>
     </p>
 </div>
