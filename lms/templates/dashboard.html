@@ -31,12 +31,6 @@ import json
     <%static:include path="search/${template_name}.underscore" />
 </script>
 % endfor
-
-% for template_name in ["dashboard_revision_item", "dashboard_revision_list", "dashboard_revision_loading", "dashboard_revision_error"]:
-<script type="text/template" id="${template_name}-tpl">
-    <%static:include path="revisions/${template_name}.underscore" />
-</script>
-% endfor
 </%block>
 
 <%block name="js_extra">
@@ -63,10 +57,6 @@ import json
         banner.showMessage(${json.dumps(redirect_message)})
     </%static:require_module>
   % endif
-
-  <%static:require_module module_name="js/revisions/dashboard_revision_factory" class_name="DashboardRevisionFactory">
-    DashboardRevisionFactory();
-  </%static:require_module>
 </%block>
 
 <div class="dashboard-notifications" tabindex="-1">
@@ -189,13 +179,12 @@ import json
         <a href="${reverse('payment:list-receipts')}" class="edit-name">
             ${_("Order History")}
         </a>
-      </span>
+
+      </ul>
       ## We remove the identity verification status display, because this process is entrusted to proctorU
       ## <%include file='dashboard/_dashboard_status_verification.html' />
 ## END FUN
-      </ul>
-    </section>
-    <section id="dashboard-revisions" class="dashboard-revisions" aria-live="polite" aria-atomic="true">
+
     </section>
   </section>
 </section>

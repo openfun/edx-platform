@@ -1,10 +1,10 @@
 """
-Content Library Transformers.
+Content Library Transformer.
 """
 import json
 from courseware.models import StudentModule
 from openedx.core.lib.block_cache.transformer import BlockStructureTransformer
-from xmodule.library_content_module import AdaptiveLibraryContentModule, LibraryContentModule
+from xmodule.library_content_module import LibraryContentModule
 from xmodule.modulestore.django import modulestore
 from eventtracking import tracker
 
@@ -18,7 +18,6 @@ class ContentLibraryTransformer(BlockStructureTransformer):
     Staff users are *not* exempted from library content pathways.
     """
     VERSION = 1
-    MODULE_CLASS = LibraryContentModule
 
     @classmethod
     def name(cls):
@@ -27,13 +26,6 @@ class ContentLibraryTransformer(BlockStructureTransformer):
         same identifier used in setup.py.
         """
         return "library_content"
-
-    @classmethod
-    def target_block_type(cls):
-        """
-        Block type that this transformer operates on.
-        """
-        return cls.name()
 
     @classmethod
     def collect(cls, block_structure):
@@ -56,10 +48,10 @@ class ContentLibraryTransformer(BlockStructureTransformer):
                 "original_usage_version": unicode(orig_version) if orig_version else None,
             }
 
-        # For each block check if block is of target_block_type.
-        # If it is, add children array to content_library_children field
+        # For each block check if block is library_content.
+        # If library_content add children array to content_library_children field
         for block_key in block_structure.topological_traversal(
-                filter_func=lambda block_key: block_key.block_type == cls.target_block_type(),
+                filter_func=lambda block_key: block_key.block_type == 'library_content',
                 yield_descendants_of_unyielded=True,
         ):
             xblock = block_structure.get_xblock(block_key)
@@ -75,7 +67,7 @@ class ContentLibraryTransformer(BlockStructureTransformer):
         all_library_children = set()
         all_selected_children = set()
         for block_key in block_structure.topological_traversal(
-                filter_func=lambda block_key: block_key.block_type == self.target_block_type(),
+                filter_func=lambda block_key: block_key.block_type == 'library_content',
                 yield_descendants_of_unyielded=True,
         ):
             library_children = block_structure.get_children(block_key)
@@ -98,7 +90,7 @@ class ContentLibraryTransformer(BlockStructureTransformer):
 
                 # update selected
                 previous_count = len(selected)
-                block_keys = self.MODULE_CLASS.make_selection(selected, library_children, max_count, mode)
+                block_keys = LibraryContentModule.make_selection(selected, library_children, max_count, mode)
                 selected = block_keys['selected']
 
                 # publish events for analytics
@@ -109,7 +101,7 @@ class ContentLibraryTransformer(BlockStructureTransformer):
             """
             Return True if selected block should be removed.
 
-            Block is removed if it is part of target_block_type, but has
+            Block is removed if it is part of library_content, but has
             not been selected for current user.
             """
             if block_key not in all_library_children:
@@ -178,27 +170,8 @@ class ContentLibraryTransformer(BlockStructureTransformer):
             event_data.update(kwargs)
             tracker.emit("edx.librarycontentblock.content.{}".format(event_name), event_data)
 
-        cls.MODULE_CLASS.publish_selected_children_events(
+        LibraryContentModule.publish_selected_children_events(
             block_keys,
             format_block_keys,
             publish_event,
         )
-
-
-class AdaptiveContentLibraryTransformer(ContentLibraryTransformer):
-    """
-    A transformer that manipulates the block structure by removing all
-    blocks within an adaptive_library_content module to which a user should not
-    have access.
-
-    Staff users are *not* exempted from library content pathways.
-    """
-    MODULE_CLASS = AdaptiveLibraryContentModule
-
-    @classmethod
-    def name(cls):
-        """
-        Unique identifier for the transformer's class;
-        same identifier used in setup.py.
-        """
-        return "adaptive_library_content"

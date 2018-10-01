@@ -2,7 +2,7 @@
 
 from __future__ import absolute_import
 
-from functools import reduce  # pylint: disable=redefined-builtin
+from functools import reduce
 import logging
 import operator
 
@@ -32,11 +32,6 @@ class AdaptiveLearningBackend(BaseBackend):
 
     @staticmethod
     def _get_from_event(event, path, default=None):
-        """
-        Extract value of `path` from `event` dictionary and return it.
-
-        If `path` does not exist in `event`, return `default` value instead.
-        """
         path_components = path.split('.')
         try:
             return reduce(operator.getitem, path_components, event)

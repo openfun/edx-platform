@@ -1,3 +1,0 @@
-<span class="title edit-name">
-  <%= gettext("Error fetching revisions.") %>
-</span>

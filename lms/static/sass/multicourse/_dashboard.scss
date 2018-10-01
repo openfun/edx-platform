@@ -32,17 +32,6 @@
     }
   }
 
-  .dashboard-revisions {
-    margin: ($baseline*2) 0;
-    border-top: 3px solid #0078b0;
-    padding: $baseline 0;
-    color: $link-color;
-    li {
-      list-style-type: disc;
-      color: $link-color;
-    }
-  }
-
   .profile-sidebar {
     background: transparent;
     @include float(right);
@@ -1456,3 +1445,4 @@ a.fade-cover{
     }
   }
 }
+

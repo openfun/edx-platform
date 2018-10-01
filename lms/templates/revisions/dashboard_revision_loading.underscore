@@ -1,3 +1,0 @@
-<span class="title edit-name">
-  <%= gettext("Loading revisions...") %>
-</span>
