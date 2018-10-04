@@ -27,6 +27,15 @@ from xblock_django.models import XBlockStudioConfigurationFlag
 from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.exceptions import ItemNotFoundError
 
+# Try to import the configurable LTI consumer xblock that overrides Open edX
+# default LTI xblock. It has no effect if this alternative xblock is not
+# installed.
+try:
+    from lti_consumer import add_dynamic_components
+except ImportError:
+    add_dynamic_components = None
+
+
 __all__ = [
     'container_handler',
     'component_handler'
@@ -359,6 +368,17 @@ def get_component_templates(courselike, library=False):
         "support_legend": create_support_legend_dict()
     }
     advanced_component_types = _advanced_component_types(allow_unsupported)
+
+    # Read CONFIGURABLE_XBLOCKS_SETTINGS configuration to create related button
+    if add_dynamic_components:
+        add_dynamic_components(
+            getattr(settings, "XBLOCKS_FACTORY"),
+            advanced_component_templates,
+            categories,
+            create_template_dict,
+            course_advanced_keys
+        )
+
     # Set component types according to course policy file
     if isinstance(course_advanced_keys, list):
         for category in course_advanced_keys:

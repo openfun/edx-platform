@@ -1,0 +1,4 @@
+# Open edX extended: dependencies
+
+# ==== xblocks ====
+configurable_lti_consumer-xblock==0.1.0
