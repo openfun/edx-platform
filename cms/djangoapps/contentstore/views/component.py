@@ -31,7 +31,7 @@ from xmodule.modulestore.exceptions import ItemNotFoundError
 # default LTI xblock. It has no effect if this alternative xblock is not
 # installed.
 try:
-    from lti_consumer import add_dynamic_components
+    from configurable_lti_consumer import add_dynamic_components
 except ImportError:
     add_dynamic_components = None
 
@@ -372,7 +372,7 @@ def get_component_templates(courselike, library=False):
     # Read CONFIGURABLE_XBLOCKS_SETTINGS configuration to create related button
     if add_dynamic_components:
         add_dynamic_components(
-            getattr(settings, "XBLOCKS_FACTORY"),
+            getattr(settings, "CONFIGURABLE_XBLOCKS_SETTINGS"),
             advanced_component_templates,
             categories,
             create_template_dict,
