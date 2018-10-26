@@ -372,7 +372,7 @@ def get_component_templates(courselike, library=False):
     # Read CONFIGURABLE_XBLOCKS_SETTINGS configuration to create related button
     if add_dynamic_components:
         add_dynamic_components(
-            getattr(settings, "CONFIGURABLE_XBLOCKS_SETTINGS"),
+            getattr(settings, "CONFIGURABLE_LTI_CONSUMER_SETTINGS"),
             advanced_component_templates,
             categories,
             create_template_dict,
