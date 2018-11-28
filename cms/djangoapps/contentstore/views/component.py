@@ -369,10 +369,10 @@ def get_component_templates(courselike, library=False):
     }
     advanced_component_types = _advanced_component_types(allow_unsupported)
 
-    # Read CONFIGURABLE_XBLOCKS_SETTINGS configuration to create related button
+    # Read LTI_XBLOCK_CONFIGURATIONS setting to add links to the `Advanced` component button
     if add_dynamic_components:
         add_dynamic_components(
-            getattr(settings, "CONFIGURABLE_LTI_CONSUMER_SETTINGS"),
+            getattr(settings, "LTI_XBLOCK_CONFIGURATIONS"),
             advanced_component_templates,
             categories,
             create_template_dict,
