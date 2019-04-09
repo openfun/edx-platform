@@ -29,6 +29,15 @@ from student.auth import has_course_author_access
 from django.utils.translation import ugettext as _
 from xblock_django.models import XBlockDisableConfig
 
+# Try to import the configurable LTI consumer xblock that overrides Open edX
+# default LTI xblock. It has no effect if this alternative xblock is not
+# installed.
+try:
+    from configurable_lti_consumer import add_dynamic_components
+except ImportError:
+    add_dynamic_components = None
+
+
 __all__ = [
     'container_handler',
     'component_handler'
@@ -245,7 +254,6 @@ def get_component_templates(courselike, library=False):
     # Libraries do not support advanced components at this time.
     if library:
         return component_templates
-
     # Check if there are any advanced modules specified in the course policy.
     # These modules should be specified as a list of strings, where the strings
     # are the names of the modules in ADVANCED_COMPONENT_TYPES that should be
@@ -253,6 +261,17 @@ def get_component_templates(courselike, library=False):
     course_advanced_keys = courselike.advanced_modules
     advanced_component_templates = {"type": "advanced", "templates": [], "display_name": _("Advanced")}
     advanced_component_types = _advanced_component_types()
+
+    # Read LTI_XBLOCK_CONFIGURATIONS setting to add links to the `Advanced` component button
+    if add_dynamic_components:
+        add_dynamic_components(
+            getattr(settings, "LTI_XBLOCK_CONFIGURATIONS"),
+            advanced_component_templates,
+            categories,
+            create_template_dict,
+            course_advanced_keys
+        )
+
     # Set component types according to course policy file
     if isinstance(course_advanced_keys, list):
         for category in course_advanced_keys:
