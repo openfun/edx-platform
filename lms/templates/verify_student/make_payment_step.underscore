@@ -7,7 +7,7 @@
                     {courseName: '<span class="course-title">' + courseName + '</span>' }
     ) %>
             </h2>
-      <% } else { %>
+    <% } else { %>
         <h2 class="title">
           <%= _.sprintf(
                         "<span class='color-black'>Vous allez passer un examen pour obtenir un certificat:</span> <strong>%(courseName)s</strong>",
@@ -17,58 +17,74 @@
         <div class="instruction">
 
         </div>
-        <% } %>
+    <% } %>
 
-        </div>
+  </div>
 </div>
-</div >
 
   <div class="fun-wrapper-make-payment-step">
-
-    <strong>Il existe 3 types d’examen :</strong>
+    <p>
+      <strong>Il existe 3 types d’examen :</strong>
+    </p>
     <ul>
       <li>A - Examen en présentiel</li>
       <li>B - Soumission des travaux et corrections en différé</li>
-      <li>C - Examen surveillé à distance par ProctorU</li>
+      <li>C - Examen surveillé à distance par ProctorExam</li>
     </ul>
 
-    <h3>ATTENTION DE CHOISIR LA BONNE PROCÉDURE SÉLECTIONNÉE PAR L'EQUIPE PÉDAGOGIQUE DU MOOC :</h3>
-    <strong class="color-fun-red">
-      Dans les cas A et B
-    </strong>
-
+    <h3>ATTENTION DE CHOISIR LA BONNE PROCÉDURE SÉLECTIONNÉE PAR L'ÉQUIPE PÉDAGOGIQUE DU MOOC :</h3>
+    <p>
+      <strong class="color-fun-red">
+        Dans les cas A et B
+      </strong>
+    </p>
     <p>
       <strong>Si l’examen qu’on vous propose est :</strong>
-      <ul>
-        <li>A - Examen en présentiel</li>
-        <li>B - Soumission des travaux et corrections en différé</li>
-      </ul>
-      <strong>vous n’êtes pas concerné par le test web cam et la demande de photo d’identité officielle ci-dessous.
-Dans ce cas, vous devez seulement :</strong>
-      <ul>
-        <li>1 - Lire et accepter les conditions générales d’utlisation ci-dessous en cliquant sur le bouton “J’accepte”</li>
-        <li>2 - Effectuer le paiement en cliquant sur le bouton “payer” et suivre la procédure indiquée</li>
-      </ul>
+    </p>
+    <ul>
+      <li>A - Examen en présentiel</li>
+      <li>B - Soumission des travaux et corrections en différé</li>
+    </ul>
+    <p>
+    Avant de vous inscrire, prenez le temps de lire le
+    <a href="https://www.fun-mooc.help/hc/fr/articles/360001099297" target="_blank">règlement d'examen</a> /
+    <a href="https://www.fun-mooc.help/hc/fr/articles/360001132358" target="_blank">examination rules</a>
+    <br />
+    <strong>Ensuite, uniquement pour les cas A et B, vous devez seulement&nbsp;:</strong>
+    </p>
+    <ul>
+      <li>1 - Lire et accepter les conditions générales d’utlisation ci-dessous en cliquant sur le bouton “J’accepte”</li>
+      <li>2 - Effectuer le paiement en cliquant sur le bouton “payer” et suivre la procédure indiquée</li>
+    </ul>
+    <p>
       <strong class="color-fun-red">Dans le cas C</strong>
-      <br>
+      <br />
         <strong>Si l’examen qu’on vous propose est :</strong>
-        <ul>
-          <li>C - Examen surveillé à distance par ProctorU</li>
-        </ul>
-        <strong>vous êtes concerné par la procédure ci-dessous (photo d’identité officielle, test webcam...)</strong>
     </p>
-      <p>
-      Avant de vous inscrire, prenez le temps de lire <a href="https://www.fun-mooc.help/hc/fr/articles/360001306209" target="_blank">le règlement d'examen (version française)</a> / <a href="https://www.fun-mooc.help/hc/fr/articles/360001310345" target="_blank">examination rules (english version)</a>
-      </p>
-      <p>
-      Une fois le paiement effectué vous vous engagez à passer un examen surveillé à distance selon les protocoles définis pour ce cours. Veuillez vérifier que votre équipement est compatible avec le système de surveillance de notre fournisseur ProctorU en <a href="https://www.fun-mooc.fr/proctoru/" target="_blank">cliquant ici</a>.
+    <ul>
+      <li>C - Examen surveillé à distance par ProctorExam</li>
+    </ul>
+    <p>
+      Avant de vous inscrire, prenez le temps de lire le
+      <a href="https://www.fun-mooc.help/hc/fr/articles/360001099297" target="_blank">règlement d'examen</a> /
+      <a href="https://www.fun-mooc.help/hc/fr/articles/360001132358" target="_blank">examination rules</a>
+      <br /><br />
+      <strong>Vous êtes concerné par la procédure ci-dessous (pièce d’identité avec photo, test webcam, etc.)</strong>
     </p>
-      <p>
-        <% if ( verificationDeadline ) { %>
-        Vous avez jusqu'au <%- _.sprintf(" %(date)s ", {date: verificationDeadline } ) %> pour vous inscrire à cet examen.
-        Notez que le jour de l'examen vous aurez impérativement besoin d'une pièce d'identité à montrer au surveillant et que votre ordinateur devra être muni d'une webcam.
-        <% } %>
+    <p>
+      Une fois le paiement effectué vous vous engagez à passer un examen surveillé à distance selon les protocoles définis pour ce cours. Veuillez vérifier que votre équipement est compatible avec le système de surveillance de notre fournisseur ProctorExam en vous rendant sur le lien suivant&nbsp;: <a href="https://www.fun-mooc.help/hc/fr/articles/360001215417" target="_blank"> vérification de la configuration de votre ordinateur</a>
     </p>
+    <% if ( verificationDeadline ) { %>
+    <p>
+      Vous avez jusqu'au <%- _.sprintf(" %(date)s ", {date: verificationDeadline } ) %> pour vous inscrire à cet examen.
+      Notez que le jour de l'examen vous aurez impérativement besoin&nbsp;:
+    </p>
+    <ul>
+      <li>d'une pièce d'identité (la liste des pièces autorisées se trouve dans le règlement d’examen)</li>
+      <li>un ordinateur muni d'une webcam en état de fonctionner</li>
+      <li>d’un micro en état de fonctionner</li>
+    </ul>
+    <% } %>
 </div>
 
 
