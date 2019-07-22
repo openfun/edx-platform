@@ -40,6 +40,8 @@
 #     repos before picking a version number. Don't use 0.0 on master, only for
 #     tight-loop work in progress.
 
+# Pin path.py. Some packages below require path.py with no version and the latest versions don't support Python 2
+path.py==9.0.0
 
 # Python libraries to install directly from github
 
