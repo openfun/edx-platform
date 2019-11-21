@@ -167,9 +167,6 @@ def create_modulestore_instance(
     else:
         xb_user_service = None
 
-    if 'read_preference' in doc_store_config:
-        doc_store_config['read_preference'] = getattr(ReadPreference, doc_store_config['read_preference'])
-
     if XBlockDisableConfig and settings.FEATURES.get('ENABLE_DISABLING_XBLOCK_TYPES', False):
         disabled_xblock_types = XBlockDisableConfig.disabled_block_types()
     else:
