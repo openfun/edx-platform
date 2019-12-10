@@ -140,15 +140,16 @@ def anonymous_id_for_user(user, course_id, save=True):
             user=user,
             course_id=course_id
         )
-        if anonymous_user_id.anonymous_user_id != digest:
-            log.error(
-                u"Stored anonymous user id %r for user %r "
-                u"in course %r doesn't match computed id %r",
-                user,
-                course_id,
-                anonymous_user_id.anonymous_user_id,
-                digest
-            )
+        # FUN: deactivate logging that is spamming us until we figure out what to do.
+        # if anonymous_user_id.anonymous_user_id != digest:
+        #     log.error(
+        #         u"Stored anonymous user id %r for user %r "
+        #         u"in course %r doesn't match computed id %r",
+        #         user,
+        #         course_id,
+        #         anonymous_user_id.anonymous_user_id,
+        #         digest
+        #     )
     except IntegrityError:
         # Another thread has already created this entry, so
         # continue
