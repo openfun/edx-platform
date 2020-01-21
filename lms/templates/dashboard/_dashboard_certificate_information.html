@@ -66,7 +66,6 @@ else:
   </p>
 % endif
 
-
 % if cert_status['show_disabled_download_button'] or cert_status['show_download_url'] or cert_status['show_survey_button']:
   <div class="wrapper-message-primary">
     <ul class="actions actions-primary">
@@ -78,14 +77,14 @@ else:
       % elif cert_status['show_download_url'] and enrollment.mode in CourseMode.NON_VERIFIED_MODES:
         <li class="action action-certificate">
         #### FUN: Retrieve PDF from GeneratedCertificate
-        <a class="btn" href="${fun_cert.download_url}" id="fun-honor-pdf"
+        <a class="btn" href="/media/${fun_cert.download_url}" id="fun-honor-pdf"
            title="${_('This link will open/download a PDF document')}">
            ${_("Download {cert_name_short} (PDF)").format(cert_name_short=cert_name_short,)}</a></li>
 
       #### verified qui a échoué à l'exam => pdf
       % elif cert_status['show_download_url'] and enrollment.mode == 'verified' and cert_status['mode'] == 'honor':
         <li class="action">
-        <a class="btn" href="${fun_cert.download_url}" id="fun-verified-failed-pdf"
+        <a class="btn" href="/media/${fun_cert.download_url}" id="fun-verified-failed-pdf"
            title="${_('This link will open/download a PDF document')}">
            ${_("Download Your {cert_name_short} (PDF)").format(cert_name_short=cert_name_short)}</a></li>
 
