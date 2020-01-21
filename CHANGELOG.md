@@ -8,6 +8,12 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [dogwood.3-fun-5.3.2] - 2020-01-21
+
+### Fixed
+
+- Fix FUN's certificates paths and urls after relocating them to a folder in media files.
+
 ## [dogwood.3-fun-5.3.1] - 2020-01-17
 
 ### Fixed
@@ -26,7 +32,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Correctly use read_preference setting in doc_store_config
 
-[unreleased]: https://github.com/openfun/edx-platform/compare/dogwood.3-fun-5.3.1...dogwood.3-fun
-[dogwood.3-fun-5.3.1] https://github.com/openfun/edx-platform/compare/fun-5.2.0...dogwood.3-fun-5.3.1
-[dogwood.3-fun-5.3.0] https://github.com/openfun/edx-platform/compare/fun-5.2.0...v5.3.0
+[unreleased]: https://github.com/openfun/edx-platform/compare/dogwood.3-fun-5.3.2...dogwood.3-fun
+[dogwood.3-fun-5.3.2] https://github.com/openfun/edx-platform/compare/fun-5.3.1...dogwood.3-fun-5.3.2
+[dogwood.3-fun-5.3.1] https://github.com/openfun/edx-platform/compare/fun-5.2.0...dogwood.3-fun-5.3.1[dogwood.3-fun-5.3.0] https://github.com/openfun/edx-platform/compare/fun-5.2.0...v5.3.0
 [dogwood.3-fun-5.2.0] https://github.com/openfun/edx-platform/compare/v5.1.0...fun-5.2.0
