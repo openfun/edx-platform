@@ -162,7 +162,7 @@ analytics-python==1.1.0
 mailsnake==1.6.2
 # Use higher jsonfield version to support new ora2
 # jsonfield==1.0.3
-jsonfield>=2.0.2,<3.0.0
+jsonfield>=2.0.2,<2.1.0
 
 # Inlines CSS styles into HTML for email notifications.
 pynliner==0.5.2

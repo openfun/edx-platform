@@ -8,6 +8,10 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+- Change jsonfield range version to not install 2.1+ versions
+
 ## [dogwood.3-fun-5.3.2] - 2020-01-21
 
 ### Fixed
